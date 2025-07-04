@@ -12,97 +12,96 @@ Categories for Programmers. In the previous installment we discussed how to add 
 
 ## Follow the Arrows
 
-The Ancient Greek playwright Euripides once said: “Every man is like the company he is wont to keep.” We are defined by our relationships. Nowhere is this more true than in category theory. If we want to single out a particular object in a category, we can only do this by describing its pattern of relationships with other objects (and itself). These relationships are defined by morphisms.
+고대 그리스 극작가 에우리피데스는 한 번 이렇게 말씀하신 적이 있습니다. “모든 사람은 자신이 붙어 다니는 동료와 같지.” 우리를 정의하는 것은 바로 우리의 관계입니다. 특히 범주론에서는 이 말이 더욱 진리입니다. 범주 내에서 특정 객체를 강조하고 싶다면, 그 객체가 다른 객체(그리고 자신)와의 관계 패턴을 통해 정의될 뿐입니다. 이러한 관계는 모피즘(morphism)에 의해 정의됩니다.
 
-There is a common construction in category theory called the universal construction for defining objects in terms of their relationships. One way of doing this is to pick a pattern, a particular shape constructed from objects and morphisms, and look for all its occurrences in the category. If it’s a common enough pattern, and the category is large, chances are you’ll have lots and lots of hits. The trick is to establish some kind of ranking among those hits, and pick what could be considered the best fit.
+카테고리 이론에서 흔히 사용되는 ‘보편적 구성’이라는 개념을 통해 객체를 그 관계를 통해 정의할 수 있습니다. 이 방법 중 하나는 객체와 모피즘으로 구성된 특정 형태를 선택하여 해당 형태가 카테고리 내에서 얼마나 많이 나타나는지 찾아보는 것입니다. 만약 그 패턴이 충분히 흔하고 카테고리가 크다면, 득량의 횟수는 매우 많을 것입니다. 핵심은 이러한 득량들 사이에서 어느 정도의 적합성을 평가하여, 가장 적합하다고 판단되는 것을 선택하는 것입니다.
 
-This process is reminiscent of the way we do web searches. A query is like a pattern. A very general query will give you large recall: lots of hits. Some may be relevant, others not. To eliminate irrelevant hits, you refine your query. That increases its precision. Finally, the search engine will rank the hits and, hopefully, the one result that you’re interested in will be at the top of the list.
-
+이 과정은 웹 검색을 할 때와 매우 유사합니다. 검색 쿼리는 마치 패턴과 같습니다. 매우 일반적인 쿼리를 사용하시면 많은 결과를 얻으실 수 있습니다. 그중 일부는 관련성이 있을 수 있지만, 일부는 그렇지 않을 수도 있습니다. 관련 없는 결과를 제거하기 위해 쿼리를 수정하시면 정확도를 높일 수 있습니다. 마지막으로 검색 엔진은 결과를 순위 매기고, 아마도 여러분이 관심을 가지고 있는 결과가 목록 상단에 나타나기를 바랍니다.
 ## Initial Object
 
-The simplest shape is a single object. Obviously, there are as many instances of this shape as there are objects in a given category. That’s a lot to choose from. We need to establish some kind of ranking and try to find the object that tops this hierarchy. The only means at our disposal are morphisms. If you think of morphisms as arrows, then it’s possible that there is an overall net flow of arrows from one end of the category to another. This is true in ordered categories, for instance in partial orders. We could generalize that notion of object precedence by saying that object a is “more initial” than object b if there is an arrow (a morphism) going from a to b. We would then define the initial object as one that has arrows going to all other objects. Obviously there is no guarantee that such an object exists, and that’s okay. A bigger problem is that there may be too many such objects: The recall is good, but precision is lacking. The solution is to take a hint from ordered categories — they allow at most one arrow between any two objects: there is only one way of being less-than or equal-to another object. Which leads us to this definition of the initial object:
+가장 단순한 형태는 단일한 객체입니다. 분명히, 주어진 범주 내에 있는 객체의 수만큼 이 형태의 인스턴스는 존재합니다. 선택할 수 있는 옵션이 매우 많습니다. 우리는 어떤 종류의 순위를 확립하고 이 계층 구조의 최상위 객체를 찾아야 합니다. 우리가 사용할 수 있는 유일한 수단은 모리즘입니다. 모리즘을 화살표로 생각한다면, 한 쪽 끝에서 다른 쪽 끝으로의 전체적인 화살표 흐름이 있을 수 있습니다. 이는 부분 순위와 같이 정렬된 범주에서 특히 그렇습니다. 따라서 객체 a가 객체 b보다 “초기적”이라고 말할 수 있는데, a에서 b로 향하는 화살표(모리즘)가 있기 때문입니다. 그러면 초기 객체는 다른 모든 객체로 향하는 화살표를 갖는 객체로 정의합니다. 물론 그러한 객체가 존재한다는 보장은 없으며, 이것은 괜찮습니다. 더 큰 문제는 너무 많은 그러한 객체가 있을 수 있다는 것입니다. 회상은 좋지만 정확도는 부족합니다. 해결책은 정렬된 범주에서 힌트를 얻는 것입니다. 정렬된 범주에서는 어떤 두 객체 사이에는 최대 한 개의 화살표만 허용됩니다. 즉, 다른 객체보다 작거나 같은 유일한 방법이 있습니다.
 
-The initial object is the object that has one and only one morphism going to any object in the category.
+초기 객체는 카테고리 내의 모든 객체로 향하는 단 하나의 모피즘만을 갖는 객체입니다.
 
-However, even that doesn’t guarantee the uniqueness of the initial object (if one exists). But it guarantees the next best thing: uniqueness up to isomorphism. Isomorphisms are very important in category theory, so I’ll talk about them shortly. For now, let’s just agree that uniqueness up to isomorphism justifies the use of “the” in the definition of the initial object.
+하지만, 그렇다고 초기 객체가 실제로 존재한다면 그 고유성을 보장하는 것은 아닙니다. 하지만 다음으로 가장 좋은 결과를 보장합니다. 바로 동형성까지의 고유성입니다. 동형성은 범주론에서 매우 중요한 개념이므로, 잠시 후 자세히 설명드리겠습니다. 우선, 동형성까지의 고유성이 초기 객체 정의에서 “the”를 사용하는 정당화를 제공한다는 점에 대해서는 모두 동의하는 것으로 하겠습니다.
 
-Here are some examples: The initial object in a partially ordered set (often called a poset) is its least element. Some posets don’t have an initial object — like the set of all integers, positive and negative, with less-than-or-equal relation for morphisms.
+부분적으로 정렬된 집합, 즉 포셋의 초기 요소는 일반적으로 최소 요소라고 불립니다. 포셋 중에는 최소 요소가 없는 경우도 있습니다. 예를 들어, 양수와 음수를 모두 포함하는 모든 정수의 집합에서 모스함수에 대한 "작거나 같음" 관계를 사용하는 경우입니다.
 
-In the category of sets and functions, the initial object is the empty set. Remember, an empty set corresponds to the Haskell type Void (there is no corresponding type in C++) and the unique polymorphic function from Void to any other type is called absurd:
+세트와 함수 범주에서 가장 기본적인 객체는 빈 집합입니다. 기억해 주시길 바랍니다. 빈 집합은 Haskell의 Void 타입(C++에는 해당 타입이 존재하지 않음)에 해당하며, Void에서 어떤 다른 타입으로의 유일한 다형 함수는 absurd라고 합니다.
 
 ```
 absurd :: Void -> a
 ```
 
-It’s this family of morphisms that makes Void the initial object in the category of types.
+이 모리즘들의 집합 덕분에 Void는 타입 범주의 초기 객체가 됩니다.
 
 ## Terminal Object
 
-Let’s continue with the single-object pattern, but let’s change the way we rank the objects. We’ll say that object a is “more terminal” than object b if there is a morphism going from b to a (notice the reversal of direction). We’ll be looking for an object that’s more terminal than any other object in the category. Again, we will insist on uniqueness:
+저희는 단일 객체 패턴을 계속 진행하면서, 객체 순서 결정 방식을 변경하고자 합니다. 객체 ‘a’가 객체 ‘b’보다 “더 최종 단계”에 있다고 판단하는 것은, ‘b’에서 ‘a’로 향하는 모피즘(morphism)이 존재한다는 것을 의미합니다. 즉, ‘a’가 다른 모든 객체보다 더 최종 단계인 객체를 찾게 됩니다. 또한, 저희는 반드시 고유성(uniqueness)을 지켜드릴 것을 약속드립니다.
 
-The terminal object is the object with one and only one morphism coming to it from any object in the category.
+어떤 객체에서 유일하게 한 개의 모피즘이 들어오는 객체를 말씀하시는 것이군요.
 
-And again, the terminal object is unique, up to isomorphism, which I will show shortly. But first let’s look at some examples. In a poset, the terminal object, if it exists, is the biggest object. In the category of sets, the terminal object is a singleton. We’ve already talked about singletons — they correspond to the void type in C++ and the unit type () in Haskell. It’s a type that has only one value — implicit in C++ and explicit in Haskell, denoted by (). We’ve also established that there is one and only one pure function from any type to the unit type:
+다시 한번 말씀드리자면, 이 터미널 객체는 동치(isomorphism)까지는 유일하며, 제가 곧 자세히 설명드리겠습니다. 하지만 우선 몇 가지 예제를 살펴보겠습니다. 부분 순서(poset)에서 터미널 객체가 존재한다면, 그것은 가장 큰 객체입니다. 집합(set) 범주에서는 터미널 객체는 단일(singleton)입니다. 이미 단일에 대해서도 이야기드렸듯이, 이는 C++의 void 타입과 Haskell의 () 유닛 타입에 해당합니다. 단 하나의 값만을 가지는 타입으로, C++에서는 암시적으로, Haskell에서는 명시적으로 표현되며, ()로 표기됩니다. 또한, 어떤 타입에서 유닛 타입으로 가는 순수 함수는 하나뿐이라는 것을 확립했습니다.
 
 ```
 unit :: a -> ()
 unit _ = ()
 ```
 
-so all the conditions for the terminal object are satisfied.
+모든 터미널 객체의 조건이 충족되었습니다.
 
-Notice that in this example the uniqueness condition is crucial, because there are other sets (actually, all of them, except for the empty set) that have incoming morphisms from every set. For instance, there is a Boolean-valued function (a predicate) defined for every type:
+이 예시에서 유일성 조건이 매우 중요합니다. 사실 모든 집합(특히 빈 집합을 제외한 모든 집합)은 모든 집합으로부터 유입되는 모듈(morphism)을 가지고 있기 때문입니다. 예를 들어, 모든 유형에 대해 정의된 부울 값 함수(명제)가 존재합니다.
 
 ```
 yes :: a -> Bool
 yes _ = True
 ```
 
-But Bool is not a terminal object. There is at least one more Bool-valued function from every type:
+불(Bool)은 터미널 객체가 아닙니다. 모든 타입에는 불(Bool) 값을 가지는 함수가 최소 하나 더 존재합니다.
 
 ```
 no :: a -> Bool
 no _ = False
 ```
 
-Insisting on uniqueness gives us just the right precision to narrow down the definition of the terminal object to just one type.
+독창성을 추구함으로써, 저희는 최종 대상의 정의를 단 하나의 유형으로 정확하게 좁힐 수 있습니다.
 
 ## Duality
 
-You can’t help but to notice the symmetry between the way we defined the initial object and the terminal object. The only difference between the two was the direction of morphisms. It turns out that for any category C we can define the opposite category Cop just by reversing all the arrows. The opposite category automatically satisfies all the requirements of a category, as long as we simultaneously redefine composition. If original morphisms f::a->b and g::b->c composed to h::a->c with h=g∘f, then the reversed morphisms fop::b->a and gop::c->b will compose to hop::c->a with hop=fop∘gop. And reversing the identity arrows is a (pun alert!) no-op.
+저희는 초기 객체와 최종 객체 간의 균형 잡힌 형태를 발견하시는 것을 막을 수 없을 것입니다. 두 객체는 모듈의 방향만 다를 뿐입니다. 어떤 범주 C에 대해 이와 같은 반대 범주 Cop를 정의할 수 있습니다. 이는 단순히 모든 모듈의 방향을 뒤집는 것으로 이루어집니다. 반대 범주는 동시에 합성 연산을 재정의하는 한, 범주로서의 모든 요구 사항을 충족합니다. 원래 모듈 f::a->b와 g::b->c가 합성되어 h::a->c = g∘f를 생성하는 경우, 반대 모듈 fop::b->a와 gop::c->b는 hop::c->a로 합성되며, hop = fop∘gop입니다. 정체 모듈을 뒤집는 것은 (말장난 주의!) 아무런 효과가 없습니다.
 
-Duality is a very important property of categories because it doubles the productivity of every mathematician working in category theory. For every construction you come up with, there is its opposite; and for every theorem you prove, you get one for free. The constructions in the opposite category are often prefixed with “co”, so you have products and coproducts, monads and comonads, cones and cocones, limits and colimits, and so on. There are no cocomonads though, because reversing the arrows twice gets us back to the original state.
+카테고리 이론을 연구하는 모든 수학자에게 카테고리의 이중성(duality)은 매우 중요한 특징입니다. 여러분이 제시하는 모든 구성(construction)에는 반대 구성이 존재하며, 여러분이 증명하는 모든 정리(theorem)에 대해 또 다른 정리가 자동으로 얻어지기 때문입니다. 반대 카테고리 내의 구성들은 종종 “co-” 접두사가 붙어 제품(product)과 공산품(coproduct), 모나드(monad)와 코모나드(comonad), 코너(cone)와 코코너(cocone), 한계(limit)와 코한계(colimit) 등으로 표현됩니다. 다만, 반대 방향으로 화살표를 두 번 거슬러 올라가면 원래 상태로 돌아오기 때문에 코모나드는 존재하지 않습니다.
 
-It follows then that a terminal object is the initial object in the opposite category.
+그러므로, 주어진 객체는 반대 범주에서 시작하는 초기 객체라고 할 수 있습니다.
 
 ## Isomorphisms
 
-As programmers, we are well aware that defining equality is a nontrivial task. What does it mean for two objects to be equal? Do they have to occupy the same location in memory (pointer equality)? Or is it enough that the values of all their components are equal? Are two complex numbers equal if one is expressed as the real and imaginary part, and the other as modulus and angle? You’d think that mathematicians would have figured out the meaning of equality, but they haven’t. They have the same problem of multiple competing definitions for equality. There is the propositional equality, intensional equality, extensional equality, and equality as a path in homotopy type theory. And then there are the weaker notions of isomorphism, and even weaker of equivalence.
+프로그래머로서, 동등성을 정의하는 것은 결코 쉬운 일이 아닙니다. 두 객체가 동등하다는 것은 무엇을 의미하는 걸까요? 그들은 메모리 내에서 동일한 위치를 차지해야 하나요 (포인터 동등성)? 아니면 모든 구성 요소의 값이 같다는 것만으로 충분한가요? 복소수 두 개가 하나는 실수 부분과 허수 부분으로, 다른 하나는 절댓값과 각도로 표현될 때 동등한 것으로 간주될까요? 수학자들은 동등성의 의미를 이미 명확히 밝혀냈을 거라고 생각할 수도 있지만, 그렇지 않습니다. 그들은 동등성에 대한 여러 가지 상충되는 정의를 가지고 있으며, 이는 isomorphism와 심지어 equivalence와 같은 더 약한 개념까지 포함합니다.
 
-The intuition is that isomorphic objects look the same — they have the same shape. It means that every part of one object corresponds to some part of another object in a one-to-one mapping. As far as our instruments can tell, the two objects are a perfect copy of each other. Mathematically it means that there is a mapping from object a to object b, and there is a mapping from object b back to object a, and they are the inverse of each other. In category theory we replace mappings with morphisms. An isomorphism is an invertible morphism; or a pair of morphisms, one being the inverse of the other.
+이러한 직관은 등가적인 객체들이 서로 동일한 모습으로 보인다는 것입니다. 즉, 각 객체의 구성 요소들이 서로 대응하는 관계를 가지는 것입니다. 현재 저희가 보유한 측정 장비로는 두 객체가 완벽하게 동일하다는 것을 알 수 있습니다. 수학적으로는 객체 a에서 객체 b로, 그리고 객체 b에서 객체 a로 가는 맵핑(mapping)이 존재하며, 이 둘은 서로 역함수 관계에 있습니다. 범주론에서는 이러한 맵핑을 모र्फ(morphism)로 대체합니다. 등각성은 역함수를 갖는 모र्फ(morphism)를 의미하며, 이는 두 모र्फ(morphism)의 쌍으로, 하나가 다른 하나의 역함수가 되는 경우를 말합니다.
 
-We understand the inverse in terms of composition and identity: Morphism g is the inverse of morphism f if their composition is the identity morphism. These are actually two equations because there are two ways of composing two morphisms:
+저희는 역함수를 구성과 항등사라는 관점에서 이해합니다. 모피즘 f의 역함수 모피즘 g는 두 모피즘의 합이 항등사일 때 정의됩니다. 이는 실제로 두 가지 방정식으로 표현될 수 있습니다.
 
 ```
 f . g = id
 g . f = id
 ```
 
-When I said that the initial (terminal) object was unique up to isomorphism, I meant that any two initial (terminal) objects are isomorphic. That’s actually easy to see. Let’s suppose that we have two initial objects i1 and i2. Since i1 is initial, there is a unique morphism f from i1 to i2. By the same token, since i2 is initial, there is a unique morphism g from i2 to i1. What’s the composition of these two morphisms?
+초기(terminal) 객체는 동형(isomorphism)까지는 유일하다는 말씀을 드렸을 때, 말씀하신 내용은 어떤 초기(terminal) 객체와 다른 초기(terminal) 객체는 서로 동형(isomorphic)이라는 의미였습니다. 실제로 이를 쉽게 이해할 수 있습니다. 만약 i1과 i2라는 두 초기(terminal) 객체를 가지고 있다면, i1이 초기(terminal) 객체이므로 i1에서 i2로 향하는 유일한 모피션 f가 존재합니다. 마찬가지로 i2가 초기(terminal) 객체이므로 i2에서 i1로 향하는 유일한 모피션 g가 존재합니다. 이 두 모피션의 합성(composition)은 무엇일까요?
 
 <!-- image -->
 
 All morphisms in this diagram are unique
 
-The composition g∘f must be a morphism from i1 to i1. But i1 is initial so there can only be one morphism going from i1 to i1. Since we are in a category, we know that there is an identity morphism from i1 to i1, and since there is room for only one, that must be it. Therefore g∘f is equal to identity. Similarly, f∘g must be equal to identity, because there can be only one morphism from i2 back to i2. This proves that f and g must be the inverse of each other. Therefore any two initial objects are isomorphic.
+함께 작용하는 연산 g∘f는 i1에서 i1로의 모듈(morphism)이어야 합니다. 하지만 i1은 초기 객체이므로 i1에서 i1로 가는 모듈은 단 하나만 존재할 수 있습니다. 카테고리 내에 있다는 것을 알면, i1에서 i1로의 항등 모듈(identity morphism)이 존재하며, 단 하나만 허용되므로 그것이 바로 그것입니다. 따라서 g∘f는 항등 모듈과 같습니다. 마찬가지로 f∘g는 항등 모듈과 같아야 하며, i2에서 i2로 돌아가는 모듈은 단 하나만 존재할 수 있기 때문입니다. 이는 f와 g가 서로의 역함수임을 증명합니다. 따라서 모든 초기 객체는 서로 동형(isomorphic)입니다.
 
-Notice that in this proof we used the uniqueness of the morphism from the initial object to itself. Without that we couldn’t prove the “up to isomorphism” part. But why do we need the uniqueness of f and g? Because not only is the initial object unique up to isomorphism, it is unique up to unique isomorphism. In principle, there could be more than one isomorphism between two objects, but that’s not the case here. This “uniqueness up to unique isomorphism” is the important property of all universal constructions.
+이 증명에서 저희는 초기 객체에서 자기 자신으로의 모듈(morphism)의 유일성을 활용했습니다. 이 유일성 없이는 “동형(isomorphism)까지”라는 부분을 증명할 수 없었습니다. 그런데 저희가 모듈 f와 g의 유일성을 필요로 하는 이유는 무엇일까요? 초기 객체가 동형까지 유일하기 때문입니다. 원칙적으로 두 객체 사이에는 여러 개의 동형이 존재할 수 있지만, 여기서는 그렇지 않습니다. 이 “유일성까지의 동형”은 모든 보편적 구성(universal construction)의 중요한 특징입니다.
 
 ## Products
 
-The next universal construction is that of a product. We know what a cartesian product of two sets is: it’s a set of pairs. But what’s the pattern that connects the product set with its constituent sets? If we can figure that out, we’ll be able to generalize it to other categories.
+다음으로 다루게 될 기본적인 구성은 제품의 개념입니다. 두 집합의 카테시안 곱이 무엇인지 이미 알고 있습니다. 바로 짝들로 이루어진 집합이죠. 하지만 이 제품 집합과 구성 요소 집합 사이에는 어떤 연결 고리가 있을까요? 이 점을 명확히 이해하게 되면, 다른 종류의 요소에도 적용할 수 있는 일반적인 원리를 찾을 수 있을 것입니다.
 
-All we can say is that there are two functions, the projections, from the product to each of the constituents. In Haskell, these two functions are called fst and snd and they pick, respectively, the first and the second component of a pair:
+저희가 말씀드릴 수 있는 것은, 제품에서 각 구성 요소로 투영하는 두 개의 함수가 있다는 것입니다. 하스케일에서는 이 두 함수를 fst와 snd라고 부르며, 각각 쌍의 첫 번째 요소와 두 번째 요소를 선택합니다.
 
 ```
 fst :: (a, b) -> a
@@ -114,16 +113,16 @@ snd :: (a, b) -> b
 snd (x, y) = y
 ```
 
-Here, the functions are defined by pattern matching their arguments: the pattern that matches any pair is (x, y), and it extracts its components into variables x and y.
+여기서는 함수들이 주어진 인자를 패턴 매칭하여 정의됩니다. 어떤 인자 쌍에 해당하는 패턴은 (x, y)이며, 이 패턴의 구성 요소들을 각각 x와 y 변수에 추출합니다.
 
-These definitions can be simplified even further with the use of wildcards:
+이 정의들은 와일드카드 사용을 통해 더욱 간결하게 표현될 수 있습니다.
 
 ```
 fst (x, _) = x
 snd (_, y) = y
 ```
 
-In C++, we would use template functions, for instance:
+C++에서는 템플릿 함수를 활용하여, 예를 들어 다음과 같이 사용할 수 있습니다.
 
 ```
 template<class A, class B>
@@ -132,18 +131,18 @@ A fst(pair<A, B> const & p) {
 }
 ```
 
-Equipped with this seemingly very limited knowledge, let’s try to define a pattern of objects and morphisms in the category of sets that will lead us to the construction of a product of two sets, a and b. This pattern consists of an object c and two morphisms p and q connecting it to a and b, respectively:
+제공해 드린 매우 제한적인 지식에도 불구하고, 집합(sets)의 범주에서 객체(objects)와 모피즘(morphisms)의 패턴을 정의하여 두 집합 a와 b의 곱(product)을 구성하는 방법을 시도해 보겠습니다. 이 패턴은 객체 c와 a와 b에 각각 연결되는 모피즘 p와 q로 구성됩니다.
 
 ```
 p :: c -> a
 q :: c -> b
 ```
 
-All cs that fit this pattern will be considered candidates for the product. There may be lots of them.
+이 패턴에 맞는 모든 고객 정보는 제품 후보로 간주될 수 있습니다. 후보는 상당히 많을 수 있습니다.
 
-For instance, let’s pick, as our constituents, two Haskell types, Int and Bool, and get a sampling of candidates for their product.
+예를 들어, 저희는 Haskell의 정수형(Int)과 불리언형(Bool) 두 가지 타입을 선택하여, 이들의 곱셈에 대한 후보들을 몇 가지 보여드리겠습니다.
 
-Here’s one: Int. Can Int be considered a candidate for the product of Int and Bool? Yes, it can — and here are its projections:
+물론입니다. Int는 Int와 Bool의 곱셈 결과로 고려될 수 있습니다. 네, 그렇습니다. 그리고 그에 대한 예측 결과는 다음과 같습니다.
 
 ```
 p :: Int -> Int
@@ -153,9 +152,9 @@ q :: Int -> Bool
 q _ = True
 ```
 
-That’s pretty lame, but it matches the criteria.
+정말 아쉽지만, 기준에 부합합니다.
 
-Here’s another one: (Int, Int, Bool). It’s a tuple of three elements, or a triple. Here are two morphisms that make it a legitimate candidate (we are using pattern matching on triples):
+다음은 또 다른 예시입니다. (정수, 정수, 불리언) 형태의 튜플, 즉 트리플입니다. 이를 통해 유효한 후보로 간주할 수 있는 두 가지 모피즘이 있습니다. (우리는 트리플에 대한 패턴 매칭을 사용하고 있습니다.)
 
 ```
 p :: (Int, Int, Bool) -> Int
@@ -165,49 +164,49 @@ q :: (Int, Int, Bool) -> Bool
 q (_, _, b) = b
 ```
 
-You may have noticed that while our first candidate was too small — it only covered the Int dimension of the product; the second was too big — it spuriously duplicated the Int dimension.
+첫 후보는 제품의 Int 차원만을 커버하여 너무 작았고, 두 번째 후보는 오히려 Int 차원을 불필요하게 중복하여 문제가 있었습니다.
 
-But we haven’t explored yet the other part of the universal construction: the ranking. We want to be able to compare two instances of our pattern. We want to compare one candidate object c and its two projections p and q with another candidate object c’ and its two projections p’ and q’. We would like to say that c is “better” than c’ if there is a morphism m from c’ to c — but that’s too weak. We also want its projections to be “better,” or “more universal,” than the projections of c’. What it means is that the projections p’ and q’ can be reconstructed from p and q using m:
+저희는 아직 우주적 구조의 또 다른 측면, 즉 순위를 탐구하지 않았습니다. 저희는 두 패턴 인스턴스를 비교할 수 있도록 하고 싶습니다. 구체적으로, 후보 객체 c와 그 두 개의 투영 p와 q를, 그리고 또 다른 후보 객체 c’와 그 두 개의 투영 p’와 q’를 비교하고자 합니다. 만약 투영 m이 c’에서 c로 존재한다면, c가 “더 나은” 객체라고 말하고 싶지만, 이것은 너무 약한 표현입니다. 또한, 저희는 그 투영 p’와 q’가 p와 q를 사용하여 m을 통해 재구성될 수 있어야 하며, 이것이 “더 보편적”이라고 할 수 있습니다.
 
 ```
 p’ = p . m
 q’ = q . m
 ```
 
-Another way of looking at these equation is that m factorizes p’ and q’. Just pretend that these equations are in natural numbers, and the dot is multiplication: m is a common factor shared by p’ and q’.
+이 방정식들을 다른 관점에서 보면, m은 p’와 q’를 나누는 공통 인수를 나타내는 것입니다. 마치 자연수 방정식처럼 생각하시고, 점(·)을 곱셈으로 간주하시면 됩니다.
 
-Just to build some intuitions, let me show you that the pair (Int, Bool) with the two canonical projections, fst and snd is indeed better than the two candidates I presented before.
+단순히 몇 가지 직관을 드리기 위해, (Int, Bool) 튜플과 그 두 가지 표준 프로젝션, 즉 fst와 snd가 제가 이전에 제시했던 두 후보보다 훨씬 더 나은 선택임을 보여드리겠습니다.
 
-The mapping m for the first candidate is:
+첫 번째 후보에 대한 매핑은 다음과 같습니다.
 
 ```
 m :: Int -> (Int, Bool)
 m x = (x, True)
 ```
 
-Indeed, the two projections, p and q can be reconstructed as:
+실제로, p와 q 두 가지 예측치는 다음과 같이 재구성될 수 있습니다.
 
 ```
 p x = fst (m x) = x
 q x = snd (m x) = True
 ```
 
-The m for the second example is similarly uniquely determined:
+두 번째 예시의 경우, 그 값은 역시 독특하게 결정됩니다.
 
 ```
 m (x, _, b) = (x, b)
 ```
 
-We were able to show that (Int, Bool) is better than either of the two candidates. Let’s see why the opposite is not true. Could we find some m' that would help us reconstruct fst and snd from p and q?
+저희는 (Int, Bool)이 두 후보 중 더 나은 성능을 보인다는 것을 확인해 드렸습니다. 그 이유를 살펴보시죠. p와 q를 이용하여 fst와 snd를 재구성할 수 있는 m'를 찾을 수 있을까요?
 
 ```
 fst = p . m’
 snd = q . m’
 ```
 
-In our first example, q always returned True and we know that there are pairs whose second component is False. We can’t reconstruct snd from q.
+첫 번째 예시에서 q는 항상 True를 반환했고, 두 번째 요소가 False인 쌍들이 존재한다는 것을 알고 있습니다. 따라서 q를 통해 snd를 재구성할 수 없습니다.
 
-The second example is different: we retain enough information after running either p or q, but there is more than one way to factorize fst and snd. Because both p and q ignore the second component of the triple, our m’ can put anything in it. We can have:
+두 번째 예시는 다릅니다. p 또는 q를 실행한 후에도 충분한 정보를 유지하지만, fst와 snd를 인수분해하는 방법은 여러 가지가 있습니다. p와 q 모두 세 번째 요소(second component)를 무시하기 때문에, 저희의 m’는 그 어떤 값이나 넣을 수 있습니다. 다음과 같은 경우를 가질 수 있습니다:
 
 ```
 m’ (x, b) = (x, x, b)
@@ -221,20 +220,20 @@ m’ (x, b) = (x, 42, b)
 
 and so on.
 
-Putting it all together, given any type c with two projections p and q, there is a unique m from c to the cartesian product (a, b) that factorizes them. In fact, it just combines p and q into a pair.
+모든 요소를 종합해 볼 때, 어떤 유형 c와 두 개의 투영 p와 q가 주어졌을 때, 그 두 투영을 인수분해하는 고유한 m이 c에서 (a, b)의 카테시안 곱으로 존재합니다. 실제로, 이는 단순히 p와 q를 한 쌍으로 결합하는 것입니다.
 
 ```
 m :: c -> (a, b)
 m x = (p x, q x)
 ```
 
-That makes the cartesian product (a, b) our best match, which means that this universal construction works in the category of sets. It picks the product of any two sets.
+(a, b) 튜플이 최적의 일치 항목이 되므로, 이는 집합론의 범주에서 이 보편적인 구성이 작동한다는 의미입니다. 이 구성은 어떤 두 집합의 곱을 선택합니다.
 
-Now let’s forget about sets and define a product of two objects in any category using the same universal construction. Such product doesn’t always exist, but when it does, it is unique up to a unique isomorphism.
+자, 이제 집합론을 잠시 잊고, 동일한 보편적 구성(universal construction)을 사용하여 어떤 범주(category) 내의 두 객체의 곱(product)을 정의해 보겠습니다. 이러한 곱이 항상 존재하는 것은 아니지만, 존재한다면 고유한 동형사상(unique isomorphism)까지 고려했을 때 유일합니다.
 
-A product of two objects a and b is the object c equipped with two projections such that for any other object c’ equipped with two projections there is a unique morphism m from c’ to c that factorizes those projections.
+두 물체 a와 b의 곱은 두 개의 투영을 갖는 물체 c로, 다른 물체 c’와 두 개의 투영을 갖는 경우, c’에서 c로 가는 고유한 모피쉬 m이 존재하여 그 투영들을 분해하는 데 사용된다는 것을 의미합니다.
 
-A (higher order) function that produces the factorizing function m from two candidates is sometimes called the factorizer. In our case, it would be the function:
+두 후보를 통해 인수 함수 m을 생성하는 (고차) 함수를 때때로 인수 함수라고 부릅니다. 저희 경우, 다음과 같은 함수가 해당됩니다:
 
 ```
 factorizer :: (c -> a) -> (c -> b) -> (c -> (a, b))
@@ -243,27 +242,27 @@ factorizer p q = \x -> (p x, q x)
 
 ## Coproduct
 
-Like every construction in category theory, the product has a dual, which is called the coproduct. When we reverse the arrows in the product pattern, we end up with an object c equipped with two injections, i and j: morphisms from a and b to c.
+각 범주 내의 다른 구성 요소와 마찬가지로, 곱셈 또한 쌍대 구성 요소(coproduct)를 가집니다. 곱셈 패턴의 화살표 방향을 반대로 진행하면, a와 b에서 c로 향하는 두 개의 주입(injections)을 갖는 객체 c가 생성됩니다.
 
 ```
 i :: a -> c
 j :: b -> c
 ```
 
-The ranking is also inverted: object c is “better” than object c’ that is equipped with the injections i’ and j’ if there is a morphism m from c to c’ that factorizes the injections:
+객체 C가 객체 C’보다 더 우수하다고 평가됩니다. 객체 C’는 주입 i’와 j’가 장착되어 있는데, 만약 C에서 C’로 가는 모필(m)이 주입을 분해한다면 말입니다.
 
 ```
 i' = m . i
 j' = m . j
 ```
 
-The “best” such object, one with a unique morphism connecting it to any other pattern, is called a coproduct and, if it exists, is unique up to unique isomorphism.
+가장 훌륭한 형태의 객체는, 어떤 패턴과 다른 패턴을 연결하는 고유한 모피즘을 갖는 것으로, 존재할 경우 고유한 동형사상까지 고려했을 때 고유합니다.
 
-A coproduct of two objects a and b is the object c equipped with two injections such that for any other object c’ equipped with two injections there is a unique morphism m from c to c’ that factorizes those injections.
+두 객체 a와 b의 공산품은 두 개의 주입을 갖는 객체 c로서, 다른 객체 c’가 두 개의 주입을 갖는 경우, c에서 c’로의 모피쉬 m이 존재하여 그 주입을 분해하는 고유한 모피쉬가 존재한다는 것입니다.
 
-In the category of sets, the coproduct is the disjoint union of two sets. An element of the disjoint union of a and b is either an element of a or an element of b. If the two sets overlap, the disjoint union contains two copies of the common part. You can think of an element of a disjoint union as being tagged with an identifier that specifies its origin.
+세트(set) 범주에서 코프로덕트(coproduct)는 두 개의 세트를 서로 겹치지 않는 방식으로 합친 것으로, 서로 겹치지 않는 합집합이라고 생각하실 수 있습니다. a와 b의 서로 겹치지 않는 합집합의 요소는 a의 요소이거나 b의 요소 중 하나입니다. 만약 두 세트가 겹치는 경우, 공통 부분은 두 개의 복사본을 포함하게 됩니다. 즉, 서로 겹치는 부분은 두 개의 복사본으로 나타나는 것입니다.
 
-For a programmer, it’s easier to understand a coproduct in terms of types: it’s a tagged union of two types. C++ supports unions, but they are not tagged. It means that in your program you have to somehow keep track which member of the union is valid. To create a tagged union, you have to define a tag — an enumeration — and combine it with the union. For instance, a tagged union of an int and a char const * could be implemented as:
+프로그래머의 경우, 유형 측면에서 코프로덕트를 이해하는 것은 더 쉽습니다. 코프로덕트는 두 유형의 태깅된 유니언으로 표현될 수 있습니다. C++는 유니언을 지원하지만, 유니언은 태깅되지 않습니다. 즉, 여러분의 프로그램에서 어떤 유니언 멤버가 유효한지 Somehow 추적해야 합니다. 태깅된 유니언을 생성하려면 태그, 즉 열거형을 정의하고 유니언과 함께 조합해야 합니다. 예를 들어, 정수와 const char\*의 태깅된 유니언은 다음과 같이 구현될 수 있습니다:
 
 ```
 struct Contact {
@@ -272,7 +271,7 @@ struct Contact {
 };
 ```
 
-The two injections can either be implemented as constructors or as functions. For instance, here’s the first injection as a function PhoneNum:
+두 가지 주사위 구현 방식을 선택하실 수 있습니다. 첫 번째 주사위는 함수 형태로, PhoneNum으로 구현될 수 있습니다.
 
 ```
 Contact PhoneNum(int n) {
@@ -283,32 +282,32 @@ Contact PhoneNum(int n) {
 }
 ```
 
-It injects an integer into Contact.
+연락처에 정수 값을 삽입합니다.
 
-A tagged union is also called a variant, and there is a very general implementation of a variant in the boost library, boost::variant.
+태깅된 연합(tagged union)은 변환(variant)이라고도 불리며, boost 라이브러리에는 boost::variant라는 매우 일반적인 구현이 있습니다.
 
-In Haskell, you can combine any data types into a tagged union by separating data constructors with a vertical bar. The Contact example translates into the declaration:
+하스케일에서는 데이터를 구분하는 수직선(vertical bar)을 사용하여 데이터 생성자를 분리함으로써, 어떤 데이터 유형이든 태깅된 유니온으로 결합할 수 있습니다. Contact 예시는 다음과 같이 선언으로 표현됩니다:
 
 ```
 data Contact = PhoneNum Int | EmailAddr String
 ```
 
-Here, PhoneNum and EmailAddr serve both as constructors (injections), and as tags for pattern matching (more about this later). For instance, this is how you would construct a contact using a phone number:
+여기에서 PhoneNum과 EmailAddr는 인젝션(constructor) 역할뿐만 아니라 패턴 매칭 태그 역할도 수행합니다. (더 자세한 내용은 나중에 설명드리겠습니다.) 연락처를 전화번호를 사용하여 구성하는 방법의 예시입니다.
 
 ```
 helpdesk :: Contact;
 helpdesk = PhoneNum 2222222
 ```
 
-Unlike the canonical implementation of the product that is built into Haskell as the primitive pair, the canonical implementation of the coproduct is a data type called Either, which is defined in the standard Prelude as:
+표준 Prelude에 정의된 Either라는 데이터 타입은, 핵심 쌍 데이터 타입인 Haskell에 내장된 표준 구현과는 달리, 다음과 같이 정의됩니다.
 
 ```
 Either a b = Left a | Right b
 ```
 
-It is parameterized by two types, a and b and has two constructors: Left that takes a value of type a, and Right that takes a value of type b.
+A와 B 두 가지 유형으로 설정 가능하며, 왼쪽(Left) 생성자는 A 타입의 값을, 오른쪽(Right) 생성자는 B 타입의 값을 받습니다.
 
-Just as we’ve defined the factorizer for a product, we can define one for the coproduct. Given a candidate type c and two candidate injections i and j, the factorizer for Either produces the factoring function:
+저희가 제품에 대한 분해기를 정의한 것처럼, 곱분해기 또한 정의할 수 있습니다. 후보 타입 c와 두 후보 주입(injection) i, j가 주어졌을 때, Either에 대한 분해기는 다음과 같은 분해 함수를 생성합니다:
 
 ```
 factorizer :: (a -> c) -> (b -> c) -> Either a b -> c
@@ -318,37 +317,37 @@ factorizer i j (Right b) = j b
 
 ## Asymmetry
 
-We’ve seen two set of dual definitions: The definition of a terminal object can be obtained from the definition of the initial object by reversing the direction of arrows; in a similar way, the definition of the coproduct can be obtained from that of the product. Yet in the category of sets the initial object is very different from the final object, and coproduct is very different from product. We’ll see later that product behaves like multiplication, with the terminal object playing the role of one; whereas coproduct behaves more like the sum, with the initial object playing the role of zero. In particular, for finite sets, the size of the product is the product of the sizes of individual sets, and the size of the coproduct is the sum of the sizes.
+저희가 두 가지의 이중 정의를 확인해 보았습니다. 종점 객체의 정의는 초기 객체의 정의를 반대로 방향을 설정하여 얻을 수 있으며, 마찬가지로 공산단의 정의 역시 곱산단의 정의를 반대로 설정하여 얻을 수 있습니다. 하지만 집합의 범주에서는 초기 객체와 최종 객체는 매우 다르며, 공산단은 곱산단과도 상당히 다릅니다. 이후 저희는 곱산단이 곱셈과 유사하게 작동한다는 것을, 그리고 초기 객체가 0 역할을 한다는 것을 살펴보게 될 것입니다. 특히 유한 집합의 경우, 곱산단의 크기는 개별 집합의 크기를 곱한 값이며, 공산단의 크기는 크기의 합으로 계산됩니다.
 
-This shows that the category of sets is not symmetric with respect to the inversion of arrows.
+이것은 집합의 범주가 화살표 반전을 기준으로 대칭이 아니라는 것을 보여줍니다.
 
-Notice that while the empty set has a unique morphism to any set (the absurd function), it has no morphisms coming back. The singleton set has a unique morphism coming to it from any set, but it also has outgoing morphisms to every set (except for the empty one). As we’ve seen before, these outgoing morphisms from the terminal object play a very important role of picking elements of other sets (the empty set has no elements, so there’s nothing to pick).
+비어있는 집합은 어떤 집합으로든 고유한 모피즘을 가지지만, 그 반대쪽에서 돌아오는 모피즘은 없습니다. 단일 원소 집합은 어떤 집합에서든 고유한 모피즘을 가지지만, 모든 집합(비어있는 집합을 제외하고)으로 향하는 모피즘도 가지고 있습니다. 앞서 말씀드린 것처럼, 이 종결 대상에서 나오는 모피즘은 다른 집합의 원소를 선택하는 데 매우 중요한 역할을 합니다(비어있는 집합은 원소가 없으므로 선택할 것이 없습니다).
 
-It’s the relationship of the singleton set to the product that sets it apart from the coproduct. Consider using the singleton set, represented by the unit type (), as yet another — vastly inferior — candidate for the product pattern. Equip it with two projections p and q: functions from the singleton to each of the constituent sets. Each selects a concrete element from either set. Because the product is universal, there is also a (unique) morphism m from our candidate, the singleton, to the product. This morphism selects an element from the product set — it selects a concrete pair. It also factorizes the two projections:
+싱글톤 집합의 곱 집합과의 관계가 이를 복합 집합과 구별 짓는 중요한 요소입니다. 단일 요소 집합(표현: () 단위 타입)을 또 다른 – 훨씬 열등한 – 곱 집합 패턴 후보로 고려해 보십시오. 두 개의 투영 함수 p와 q를 갖추어, 단일 요소 집합에서 각각의 구성 집합으로의 함수를 제공합니다. 각각은 두 집합 중 하나에서 구체적인 요소를 선택합니다. 곱 집합은 보편적이기 때문에, 우리의 후보인 단일 요소 집합에서 보편적인 모필드 m이 존재합니다. 이 모필드는 제품 집합으로의 선택을 수행하며, 구체적인 쌍을 선택합니다. 또한, 이 모필드는 두 투영 함수를 분해합니다.
 
 ```
 p = fst . m
 q = snd . m
 ```
 
-When acting on the singleton value (), the only element of the singleton set, these two equations become:
+단일 값 ( )을 기준으로 작동할 경우, 이 단일 값 집합의 유일한 요소인 두 개의 방정식이 됩니다.
 
 ```
 p () = fst (m ())
 q () = snd (m ())
 ```
 
-Since m () is the element of the product picked by m, these equations tell us that the element picked by p from the first set, p (), is the first component of the pair picked by m. Similarly, q () is equal to the second component. This is in total agreement with our understanding that elements of the product are pairs of elements from the constituent sets.
+먼저, m()은 첫 번째 집합에서 선택된 곱의 원소이므로, 이러한 방정식들은 p()는 첫 번째 집합에서 선택된 곱의 원소이며, m()은 이 원소에서 선택된 쌍의 첫 번째 구성 요소임을 알려줍니다. 마찬가지로, q()는 두 번째 구성 요소와 같습니다. 이는 곱의 원소들이 구성 요소 집합에서 가져온 쌍이라는 우리의 이해와 완전히 일치합니다.
 
-There is no such simple interpretation of the coproduct. We could try the singleton set as a candidate for a coproduct, in an attempt to extract the elements from it, but there we would have two injections going into it rather than two projections coming out of it. They’d tell us nothing about their sources (in fact, we’ve seen that they ignore the input parameter). Neither would the unique morphism from the coproduct to our singleton. The category of sets just looks very different when seen from the direction of the initial object than it does when seen from the terminal end.
+코프로덕트의 단순한 해석은 존재하지 않습니다. 코프로덕트 후보로 싱글톤 집합을 시도해 볼 수 있지만, 이로부터 요소를 추출하려 할 때 오히려 두 개의 주입이 아닌 두 개의 투영이 나올 것입니다. 이는 원천에 대한 정보를 전혀 제공하지 않으며 (실제로 입력 매개변수를 무시하는 것으로 보입니다). 또한 코프로덕트에서 싱글톤으로의 유일한 모피쉬 역시 마찬가지입니다. 집합 범주를 초기 객체 방향에서 바라볼 때와 종단 지점 방향에서 바라볼 때 모습은 매우 다릅니다.
 
-This is not an intrinsic property of sets, it’s a property of functions, which we use as morphisms in Set. Functions are, in general, asymmetric. Let me explain.
+이것은 집합의 본질적인 속성이 아니라, 함수에 대한 속성입니다. 저희는 이러한 함수를 Set에서 모듈(morphism)으로 사용하는데, 일반적으로 함수는 비대칭적인 특성을 가지고 있습니다. 자세히 설명드리겠습니다.
 
-A function must be defined for every element of its domain set (in programming, we call it a total function), but it doesn’t have to cover the whole codomain. We’ve seen some extreme cases of it: functions from a singleton set — functions that select just a single element in the codomain. (Actually, functions from an empty set are the real extremes.) When the size of the domain is much smaller than the size of the codomain, we often think of such functions as embedding the domain in the codomain. For instance, we can think of a function from a singleton set as embedding its single element in the codomain. I call them embedding functions, but mathematicians prefer to give a name to the opposite: functions that tightly fill their codomains are called surjective or onto.
+각 요소에 대해 함수를 정의해야 하지만, 함수가 전체 코도메인을 덮어덮을 필요는 없습니다. 실제로 몇 가지 극단적인 사례를 살펴보았습니다. 단일 원소 집합에서 파생된 함수와 같이, 코도메인의 단 하나의 원소만을 선택하는 함수가 그 예입니다. (실제로 빈 집합에서 파생된 함수는 훨씬 더 극단적인 경우입니다.) 도메인의 크기가 코도메인의 크기보다 훨씬 작을 때, 우리는 이러한 함수를 코도메인에 도메인을 포함시키는 것으로 생각합니다. 예를 들어, 단일 원소 집합에서 파생된 함수는 코도메인 내의 해당 단일 원소를 포함시키는 것으로 생각할 수 있습니다. 저는 이러한 함수를 ‘포함 함수’라고 부르지만, 수학자들은 반대되는 개념에 이름을 붙이는 것을 선호합니다. 즉, 함수가 코도메인을 최대한 활용하는 함수는 전사 함수 또는 onto 함수라고 합니다.
 
-The other source of asymmetry is that functions are allowed to map many elements of the domain set into one element of the codomain. They can collapse them. The extreme case are functions that map whole sets into a singleton. You’ve seen the polymorphic unit function that does just that. The collapsing can only be compounded by composition. A composition of two collapsing functions is even more collapsing than the individual functions. Mathematicians have a name for non-collapsing functions: they call them injective or one-to-one
+다른 비대칭적인 원인은 함수가 도메인 집합의 여러 요소를 하나의 코도메인 요소로 매핑할 수 있다는 점입니다. 즉, 요소를 압축할 수 있습니다. 극단적인 경우는 전체 집합을 단일 요소로 매핑하는 함수입니다. 변수를 다루는 다형성 단위 함수가 바로 그러한 기능을 수행합니다. 압축은 구성(composition)에 의해만 강화될 수 있습니다. 두 개의 압축 함수를 구성하면 개별 함수보다 훨씬 더 많은 압축이 발생합니다. 비압축 함수에 대한 수학자들은 이를 '단사 함수(injective)' 또는 '유일사함수(one-to-one)'라고 부릅니다.
 
-Of course there are some functions that are neither embedding nor collapsing. They are called bijections and they are truly symmetric, because they are invertible. In the category of sets, an isomorphism is the same as a bijection.
+물론, 어느 기능들은 embedding이나 collapsing과는 또 다른 종류입니다. 이러한 기능들을 비정칙 함수라고 부르는데, 이는 진정으로 대칭적이기 때문입니다. 집합의 범주에서는 비정칙 함수가 isomorphism과 동일합니다.
 
 ## Challenges
 
