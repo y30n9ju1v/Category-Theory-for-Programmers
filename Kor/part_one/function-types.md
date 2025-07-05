@@ -10,143 +10,145 @@ Posted by Bartosz Milewski under , , ,
 
 This is part 9 of Categories for Programmers. Previously: Functoriality. See the Table of Contents.
 
-So far I’ve been glossing over the meaning of function types. A function type is different from other types.
+지금까지 함수 타입의 의미를 충분히 파악하지 못했습니다. 함수 타입은 다른 타입과 **구별**됩니다.
 
-Take Integer, for instance: It’s just a set of integers. Bool is a two element set. But a function type a->b is more than that: it’s a set of morphisms between objects a and b. A set of morphisms between two objects in any category is called a hom-set. It just so happens that in the category Set every hom-set is itself an object in the same category —because it is, after all, a set.
+정수(Integer)를 예로 들어보겠습니다. 정수는 단순히 정수들의 집합일 뿐입니다. Bool은 두 개의 요소로 이루어진 집합입니다. 하지만 함수 타입인 a→b는 그 이상입니다. 그것은 객체 a와 b 사이의 모리즘(morphism)들의 집합입니다. 어떤 범주(category) 내에 두 객체 사이의 모리즘들의 집합은 홈-셋(hom-set)이라고 불립니다. 범주 Set에서 홈-셋은 그 자체로 동일한 범주 내의 객체입니다. 왜냐하면 그것은 결국 정수들의 집합이기 때문입니다.
 
 <!-- image -->
 
 Hom-set in Set is just a set
 
-The same is not true of other categories where hom-sets are external to a category. They are even called external hom-sets.
+다른 범주에서는 이러한 현상이 나타나지 않습니다. 특히, 외부 홈셋(external hom-sets)이라고도 불리는 경우들이 있습니다.
 
 <!-- image -->
 
 Hom-set in category C is an external set
 
-It’s the self-referential nature of the category Set that makes function types special. But there is a way, at least in some categories, to construct objects that represent hom-sets. Such objects are called internal hom-sets.
+세트(Set) 카테고리의 자전적인 특성 때문에 함수형(function types)이 특별하게 다뤄집니다. 하지만 최소한 일부 카테고리에서는 홈셋(hom-sets)을 나타내는 객체를 구성할 수 있습니다. 이러한 객체는 내부 홈셋(internal hom-sets)이라고 불립니다.
 
 ## Universal Construction
 
-Let’s forget for a moment that function types are sets and try to construct a function type, or more generally, an internal hom-set, from scratch. As usual, we’ll take our cues from the Set category, but carefully avoid using any properties of sets, so that the construction will automatically work for other categories.
+잠시만 시간을 내어 함수형 타입이 집합이라는 개념에서 벗어나, 마치 처음부터 함수형 타입을, 또는 좀 더 일반적으로 내부 홈셋을 구성해 보겠습니다. 일반적으로 Set 범주에서 영감을 얻겠지만, 집합의 특성을 사용하지 않도록 주의하여, 이 구성이 다른 범주에도 적용될 수 있도록 하겠습니다.
 
-A function type may be considered a composite type because of its relationship to the argument type and the result type. We’ve already seen the constructions of composite types — those that involved relationships between objects. We used universal constructions to define a product type and a coproduct types. We can use the same trick to define a function type. We will need a pattern that involves three objects: the function type that we are constructing, the argument type, and the result type.
+함수형은 인자형과 결과형과의 관계 때문에 복합형으로 간주될 수 있습니다. 이미 복합형의 구성, 즉 객체 간의 관계를 포함하는 구성들을 살펴보았습니다. 우리는 제품형(product type)과 공물형(coproduct type)을 정의하기 위해 보편적인 구성들을 사용했습니다. 동일한 기법을 사용하여 함수형을 정의할 수 있습니다. 함수형을 정의하기 위해서는 함수형 자체, 인자형, 결과형을 포함하는 세 객체를 사용하는 패턴이 필요합니다.
 
-The obvious pattern that connects these three types is called function application or evaluation. Given a candidate for a function type, let’s call it z (notice that, if we are not in the category Set, this is just an object like any other object), and the argument type a (an object), the application maps this pair to the result type b (an object). We have three objects, two of them fixed (the ones representing the argument type and the result type).
+이 세 가지 유형을 연결하는 명확한 패턴을 함수 적용 또는 평가라고 합니다. 후보 함수 유형을 z라고 하고, (Set 범주에 속하지 않는 경우, 이는 다른 객체와 마찬가지로 단순히 객체입니다), 그리고 인자 유형 a (객체)가 주어졌을 때, 이들은 적용을 통해 결과 유형 b (객체)로 매핑합니다. 이 과정에서 인자 유형과 결과 유형을 나타내는 두 개의 객체만 고정됩니다.
 
-We also have the application, which is a mapping. How do we incorporate this mapping into our pattern? If we were allowed to look inside objects, we could pair a function f (an element of z) with an argument x (an element of a) and map it to f x (the application of f to x, which is an element of b).
+저희는 이 애플리케이션도 제공해 드립니다. 이 애플리케이션은 지도 기반의 서비스입니다. 저희가 이 지도를 저희의 패턴에 어떻게 통합할 수 있을까요? 만약 우리가 객체 내부를 들여다볼 수 있다면, 함수 f (z의 원소)를 인자 x (a의 원소)와 연결하여 f x (x에 함수 f를 적용한 결과, b의 원소)로 매핑할 수 있을 것입니다.
 
 <!-- image -->
 
-In Set we can pick a function f from a set of functions z and we can pick an argument x from the set (type) a. We get an element f x in the set (type) b.
+저희 시스템에서는 함수 집합 z에서 함수 f를 선택하고, 또 다른 집합 a에서 인자 x를 선택합니다. 이렇게 하면 집합 b의 원소 f x를 얻게 됩니다.
 
-But instead of dealing with individual pairs (f, x), we can as well talk about the whole product of the function type z and the argument type a. The product z×a is an object, and we can pick, as our application morphism, an arrow g from that object to b. In Set, g would be the function that maps every pair (f, x) to f x.
+저희는 개별적인 쌍(f, x)를 다루는 대신, 함수 타입 z와 인자 타입 a의 전체 곱에 대해서도 논의할 수 있습니다. 곱 z×a는 객체이며, 저희는 해당 객체에서 b로 향하는 화살표 g를 애플리케이션 모리즘으로 선택할 수 있습니다. Set에서는 g는 모든 쌍 (f, x)를 f x로 매핑하는 함수입니다.
 
-So that’s the pattern: a product of two objects z and a connected to another object b by a morphism g.
+저희는 다음과 같은 패턴을 설명드리겠습니다. 즉, 두 개의 객체인 z와 a가 모사리즘 g를 통해 다른 객체 b와 연결되어 있는 형태입니다.
 
 <!-- image -->
 
 A pattern of objects and morphisms that is the starting point of the universal construction
 
-Is this pattern specific enough to single out the function type using a universal construction? Not in every category. But in the categories of interest to us it is. And another question: Would it be possible to define a function object without first defining a product? There are categories in which there is no product, or there isn’t a product for all pairs of objects. The answer is no: there is no function type, if there is no product type. We’ll come back to this later when we talk about exponentials.
+저희는 이 패턴이 보편적인 구조를 사용하여 함수 유형을 명확하게 식별하는 데 충분한가 하는 점을 확인하고 있습니다. 모든 경우에 해당하진 않지만, 저희가 관심을 가지고 있는 범주에서는 그렇습니다. 그리고 또 다른 질문이 있습니다. 먼저 제품을 정의하지 않고 함수 객체를 정의할 수 있을까요? 제품이 없는 범주나, 두 객체 쌍에 대해 제품이 존재하지 않는 범주도 있습니다. 답은 아니오입니다. 제품 유형이 존재하지 않는다면 함수 유형도 존재하지 않습니다. 나중에 지수 함수에 대해 논의할 때 다시 이 문제에 대해 이야기하겠습니다.
 
-Let’s review the universal construction. We start with a pattern of objects and morphisms. That’s our imprecise query, and it usually yields lots and lots of hits. In particular, in Set, pretty much everything is connected to everything. We can take any object z, form its product with a, and there’s going to be a function from it to b (except when b is an empty set).
+저희는 먼저 보편적인 구조를 살펴보겠습니다. 시작은 객체와 모피즘의 패턴으로 이루어집니다. 이것은 다소 모호한 질문이며, 일반적으로 매우 많은 결과를 낳습니다. 특히, 집합(Set)의 경우 거의 모든 것이 서로 연결되어 있습니다. 어떤 객체 z를 선택하고, 그 객체와 a의 곱을 취하면, b로 가는 함수가 존재합니다(단, b가 공집합이 아닌 경우).
 
-That’s when we apply our secret weapon: ranking. This is usually done by requiring that there be a mapping between candidate objects — a mapping that somehow factorizes our construction. In our case, we’ll decree that z together with the morphism g from z×a to b is better than some other z' with its own application g', if and only if there is a mapping h from z' to z such that the application of g' factors through the application of g. (Hint: Read this sentence while looking at the picture.)
+저희의 핵심 전략, 즉 순위 기능을 적용하는 시점입니다. 이는 일반적으로 후보 객체 간의 매핑이 존재해야 하며, 이 매핑이 저희의 구조를 somehow factorizes 하는 방식으로 이루어집니다. 저희의 경우, z와 모피즘 g (z×a에서 b로의 적용)가 z'와 그 자체의 모피즘 g'보다 우월하다는 것을 결정하게 됩니다. 단, z'에서 z로의 매핑 h가 존재하여 g'의 적용이 g의 적용을 통해 factorizes 되는 경우에만 해당합니다. (팁: 그림을 보면서 이 문장을 읽어주시기 바랍니다.)
 
 <!-- image -->
 
 Establishing a ranking between candidates for the function object
 
-Now here’s the tricky part, and the main reason I postponed this particular universal construction till now. Given the morphism h :: z'-> z, we want to close the diagram that has both z' and z crossed with a. What we really need, given the mapping h from z' to z, is a mapping from z'×a to z×a. And now, after discussing the functoriality of the product, we know how to do it. Because the product itself is a functor (more precisely an endo-bi-functor), it’s possible to lift pairs of morphisms. In other words, we can define not only products of objects but also products of morphisms.
+자, 이제 조금 까다로운 부분을 말씀드리겠습니다. 특히 이 보편적 구성(universal construction)을 미루게 된 가장 큰 이유는 바로 이것 때문입니다. ‘h’라는 모피즘(morphism)이 z'에서 z로의 관계를 정의했을 때, z'와 z를 ‘a’로 교차하는 다이어그램을 닫고 싶습니다.  실제로 저희가 필요로 하는 것은, z'에서 z로의 매핑(mapping)인 ‘h’를 바탕으로, z'×a에서 z×a로의 매핑을 찾는 것입니다.  이제 제품(product)의 기능적성(functoriality)에 대해 논의한 내용을 바탕으로, 저희는 이를 수행하는 방법을 알고 있습니다. 왜냐하면 제품 자체가 기능적(functor)이며, 더욱 정확히 말하면 엔도-비-기능적(endo-bi-functor)이기 때문입니다. 즉, 쌍의 모피즘(pairs of morphisms)을 들어 올리는 것이 가능합니다.  다시 말해, 저희는 객체의 제품뿐만 아니라 모피즘의 제품도 정의할 수 있습니다.
 
-Since we are not touching the second component of the product z'×a, we will lift the pair of morphisms (h, id), where id is an identity on a.
+저희는 제품 z'×a의 두 번째 구성 요소를 직접 다루지 않기 때문에, id는 a에 대한 항등 사상(identity)을 의미하며, (h, id)라는 사상 쌍을 떼어내어 활용하게 됩니다.
 
-So, here’s how we can factor one application, g, out of another application g':
+자, 다른 애플리케이션 g'에서 애플리케이션 g를 분리하는 방법을 알려드리겠습니다.
 
 ```
 g' = g ∘ (h × id)
 ```
 
-The key here is the action of the product on morphisms.
+이 제품의 핵심은 모피즘(morphisms)에 미치는 영향력입니다.
 
-The third part of the universal construction is selecting the object that is universally the best. Let’s call this object a⇒b (think of this as a symbolic name for one object, not to be confused with a Haskell typeclass constraint — I’ll discuss different ways of naming it later). This object comes with its own application — a morphism from (a⇒b)×a to b — which we will call eval. The object a⇒b is the best if any other candidate for a function object can be uniquely mapped to it in such a way that its application morphism g factorizes through eval. This object is better than any other object according to our ranking.
+세 번째 핵심 요소는 보편적으로 최상의 객체를 선택하는 것입니다. 이 객체를 a⇒b라고 부르십시오. (이는 Haskell 타입 클래스 제약 조건과 혼동되지 않도록, 하나의 객체를 상징적으로 나타내는 이름입니다). 이 객체는 자체적인 적용(application)을 가지고 있습니다. 즉, (a⇒b)×a에서 b로의 모필(morphism)입니다. 이를 eval이라고 부르겠습니다. 객체 a⇒b는 다른 후보 함수 객체가 eval을 통해 분해되는 방식으로 유일하게 매핑될 수 있을 때까지, 우리 순위에서 가장 우수한 객체입니다.
 
 <!-- image -->
 
-The definition of the universal function object. This is the same diagram as above, but now the object a⇒b is universal.
+**전역 함수 객체의 정의입니다.** 위에서 설명드린 동일한 다이어그램을 사용하지만, 이번에는 객체 a⇒b가 전역적인 역할을 수행합니다. 
+
+(Universal)
 
 Formally:
 
-Of course, there is no guarantee that such an object a⇒b exists for any pair of objects a and b in a given category. But it always does in Set. Moreover, in Set, this object is isomorphic to the hom-set Set(a, b).
+물론, 주어진 범주 내에서 어떤 두 대상 a와 b 사이에도 그러한 대상 a⇒b가 존재한다는 것을 보장할 수는 없습니다. 하지만 Set에서는 항상 존재합니다. 게다가 Set에서는 이 대상이 hom-set Set(a, b)와 동형입니다.
 
-This is why, in Haskell, we interpret the function type a->b as the categorical function object a⇒b.
+저희는 하스케일에서 함수 타입 a→b를 카테고리 함수 객체 a⇒b로 해석하는 데에는 다음과 같은 이유가 있습니다.
 
 ## Currying
 
-Let’s have a second look at all the candidates for the function object. This time, however, let’s think of the morphism g as a function of two variables, z and a.
+저희는 해당 함수 객체 후보들을 다시 한번 꼼꼼히 살펴보겠습니다. 이번에는 모피즘 g를 z와 a라는 두 변수에 대한 함수로 생각해보겠습니다.
 
 ```
 g :: z × a -> b
 ```
 
-Being a morphism from a product comes as close as it gets to being a function of two variables. In particular, in Set, g is a function from pairs of values, one from the set z and one from the set a.
+제품(Product)에서 파생된 모피즘(Morphism)은 두 변수의 함수에 가장 가까운 형태를 나타냅니다. 특히, 집합(Set)에서는 g가 z 집합에서 가져온 값과 a 집합에서 가져온 값으로 구성된 쌍(pairs)의 함수입니다.
 
-On the other hand, the universal property tells us that for each such g there is a unique morphism h that maps z to a function object a⇒b.
+다른 한편으로, 보편적 속성은 각 g에 대해 유일한 모필림 h가 z를 함수 객체 a⇒b로 매핑하는 것을 알려줍니다.
 
 ```
 h :: z -> (a⇒b)
 ```
 
-In Set, this just means that h is a function that takes one variable of type z and returns a function from a to b. That makes h a higher order function. Therefore the universal construction establishes a one-to-one correspondence between functions of two variables and functions of one variable returning functions. This correspondence is called currying, and h is called the curried version of g.
+세트(Set)에서 이는 h가 하나의 z 타입 변수를 입력받아 a부터 b까지의 함수를 반환하는 함수임을 의미합니다. 따라서 h는 고차 함수(higher-order function)가 됩니다. 이러한 관계를 통해 두 변수를 받는 함수와 하나의 변수를 받아 함수를 반환하는 함수 간의 일대일 대응이 확립됩니다. 이러한 대응은 커링(currying)이라고 하며, h는 g의 커링된 버전(curried version)이라고 합니다.
 
-This correspondence is one-to-one, because given any g there is a unique h, and given any h you can always recreate the two-argument function g using the formula:
+이 서신은 일대일 대응을 나타내는 것으로, 주어진 어떤 함수 g에 대해 반드시 고유한 함수 h가 존재하며, 주어진 어떤 함수 h를 항상 다음과 같은 공식으로 두 개의 인수를 사용하여 함수 g를 재현할 수 있습니다:
 
 ```
 g = eval ∘ (h × id)
 ```
 
-The function g can be called the uncurried version of h.
+함수 g는 함수 h의 비구형화된 버전이라고 할 수 있습니다.
 
-Currying is essentially built into the syntax of Haskell. A function returning a function:
+커링은 기본적으로 하스켈의 문법에 내재되어 있습니다. 즉, 함수를 반환하는 함수를 생성하는 기능이 하스켈에서 자연스럽게 지원됩니다.
 
 ```
 a -> (b -> c)
 ```
 
-is often thought of as a function of two variables. That’s how we read the un-parenthesized signature:
+자주 다음과 같이 두 변수의 함수로 생각됩니다. 이렇게 괄호가 없는 서명을 읽는 방식입니다: 
 
 ```
 a -> b -> c
 ```
 
-This interpretation is apparent in the way we define multi-argument functions. For instance:
+이 해석은 다중 인자 함수를 정의하는 방식에서 분명하게 드러납니다. 예를 들어: 
 
 ```
 catstr :: String -> String -> String
 catstr s s’ = s ++ s’
 ```
 
-The same function can be written as a one-argument function returning a function — a lambda:
+동일한 함수는 하나의 인자를 받는 함수를 반환하는 함수로 표현될 수 있습니다. 즉, 람다:
 
 ```
 catstr’ s = \s’ -> s ++ s’
 ```
 
-These two definitions are equivalent, and either can be partially applied to just one argument, producing a one-argument function, as in:
+이 두 정의는 서로 동등하며, 각각 하나의 논증에 부분적으로 적용하여 단일 논증 함수를 생성할 수 있습니다. 예를 들어, 다음과 같습니다:
 
 ```
 greet :: String -> String
 greet = catstr “Hello “
 ```
 
-Strictly speaking, a function of two variables is one that takes a pair (a product type):
+엄밀히 말해서, 두 변수를 가지는 함수는 (제품 유형) 한 쌍을 입력으로 받는 함수를 의미합니다.
 
 ```
 (a, b) -> c
 ```
 
-It’s trivial to convert between the two representations, and the two (higher-order) functions that do it are called, unsurprisingly, curry and uncurry:
+두 표현 간의 변환은 매우 간단하며, 이를 수행하는 두 개의 (고차) 함수는 당연히 curry와 uncurry라고 불립니다.
 
 ```
 curry :: ((a, b)->c) -> (a->b->c)
@@ -160,26 +162,26 @@ uncurry :: (a->b->c) -> ((a, b)->c)
 uncurry f (a, b) = f a b
 ```
 
-Notice that curry is the factorizer for the universal construction of the function object. This is especially apparent if it’s rewritten in this form:
+저희는 커리가 유니버설 컨스트럭션의 함수 객체 구축에 핵심적인 요소임을 알려드립니다. 특히, 다음과 같이 재구성하면 더욱 명확하게 이해하실 수 있습니다:
 
 ```
 factorizer :: ((a, b)->c) -> (a->(b->c))
 factorizer g = \a -> (\b -> g (a, b))
 ```
 
-(As a reminder: A factorizer produces the factorizing function from a candidate.)
+(참고로, 팩터라이저는 후보로부터 팩터라이징 함수를 생성합니다.)
 
-In non-functional languages, like C++, currying is possible but nontrivial. You can think of multi-argument functions in C++ as corresponding to Haskell functions taking tuples (although, to confuse things even more, in C++ you can define functions that take an explicit std::tuple, as well as variadic functions, and functions taking initializer lists).
+C++와 같은 비기능적 언어에서는 커링이 가능하지만, 복잡한 작업입니다. C++에서 다중 인수를 받는 함수는 하스켈 함수와 유사하다고 생각할 수 있습니다(물론, C++에서는 std::tuple를 명시적으로 지정하는 함수, 변형 인수를 받는 함수, 그리고 이니셜라이저 리스트를 받는 함수도 존재하여 혼란을 더합니다).
 
-You can partially apply a C++ function using the template std::bind. For instance, given a function of two strings:
+템플릿 std::bind를 사용하여 C++ 함수를 부분적으로 적용할 수 있습니다. 예를 들어, 두 개의 문자열을 받는 함수를 고려해 보십시오.
 
-```
+```c++
 std::string catstr(std::string s1, std::string s2) {
     return s1 + s2;
 }
 ```
 
-you can define a function of one string:
+저희 서비스에서는 하나의 문자열을 정의하는 함수를 설정하실 수 있습니다.
 
 ```
 using namespace std::placeholders;
@@ -188,54 +190,54 @@ auto greet = std::bind(catstr, "Hello ", _1);
 std::cout << greet("Haskell Curry");
 ```
 
-Scala, which is more functional than C++ or Java, falls somewhere in between. If you anticipate that the function you’re defining will be partially applied, you define it with multiple argument lists:
+스칼라는 C++나 Java보다 더 함수형 프로그래밍에 중점을 두고 있습니다. 만약 정의하고자 하는 함수가 부분적으로 적용될 가능성이 있다면, 여러 개의 인자 목록을 사용하여 정의해 주십시오.
 
 ```
 def catstr(s1: String)(s2: String) = s1 + s2
 ```
 
-Of course that requires some amount of foresight or prescience on the part of a library writer.
+물론, 그럴려면 도서 작성자에게 어느 정도의 예지력이나 선견지명이 필요합니다.
 
 ## Exponentials
 
-In mathematical literature, the function object, or the internal hom-object between two objects a and b, is often called the exponential and denoted by ba. Notice that the argument type is in the exponent. This notation might seem strange at first, but it makes perfect sense if you think of the relationship between functions and products. We’ve already seen that we have to use the product in the universal construction of the internal hom-object, but the connection goes deeper than that.
+수학 문헌에서 함수 객체, 또는 두 객체 a와 b 사이의 내부 홈 객체는 종종 지수 함수라고 불리며 ba로 표기됩니다. 여기서 인자 유형이 지수에 위치한다는 점에 주목해 주십시오. 처음에는 이 표기가 다소 어색하게 느껴질 수 있지만, 함수와 곱셈 간의 관계를 생각하면 완벽하게 이해할 수 있습니다. 
 
-This is best seen when you consider functions between finite types — types that have a finite number of values, like Bool, Char, or even Int or Double. Such functions, at least in principle, can be fully memoized or turned into data structures to be looked up. And this is the essence of the equivalence between functions, which are morphisms, and function types, which are objects.
+이것은 유한한 타입 간의 함수를 고려할 때 가장 잘 이해할 수 있습니다. 유한한 개수의 값을 가지는 타입, 예를 들어 Bool, Char, 심지어 Int나 Double와 같은 타입입니다. 이러한 함수들은 원칙적으로 완전히 메모이제이션되거나 조회 가능한 데이터 구조로 변환될 수 있습니다. 이것이 함수, 즉 모리즘과 함수 타입, 즉 객체 사이의 본질적인 관계입니다.
 
-For instance a (pure) function from Bool is completely specified by a pair of values: one corresponding to False, and one corresponding to True. The set of all possible functions from Bool to, say, Int is the set of all pairs of Ints. This is the same as the product Int × Int or, being a little creative with notation, Int2.
+예를 들어, Boolean에서 파생된 (순수) 함수는 두 값의 쌍으로 완전히 특정됩니다. 하나는 False에 해당하고, 다른 하나는 True에 해당합니다. Boolean에서 Int로의 모든 가능한 함수들의 집합은 Int 쌍의 모든 집합입니다. 이는 Int × Int의 곱과 동일하며, 표기법을 조금 창의적으로 사용하면 Int2와 같습니다.
 
-For another example, let’s look at the C++ type char, which contains 256 values (Haskell Char is larger, because Haskell uses Unicode). There are several functions in the  part of the C++ Standard Library that are usually implemented using lookups. Functions like isupper or isspace are implemented using tables, which are equivalent to tuples of 256 Boolean values. A tuple is a product type, so we are dealing with products of 256 Booleans: bool × bool × bool × ... × bool. We know from arithmetics that an iterated product defines a power. If you “multiply” bool by itself 256 (or char) times, you get bool to the power of char, or boolchar.
+덧붙여서, C++의 `char` 타입에 대해 살펴보겠습니다. 이 타입은 256개의 값을 포함하고 있습니다. (Haskell의 `Char`는 유니코드 사용으로 인해 더 큽니다). C++ 표준 라이브러리의 일부에는 일반적으로 룩업을 사용하여 구현되는 여러 함수들이 있습니다. 예를 들어 `isupper`나 `isspace`와 같은 함수들은 테이블을 사용하여 구현되며, 이는 256개의 부울 값으로 이루어진 튜플과 같습니다. 튜플은 곱셈 타입이므로, 256개의 부울 값의 곱을 다루게 됩니다: `bool × bool × bool × ... × bool`. 산수에서 알고 있듯이, 반복 곱셈은 거듭제곱을 정의합니다. 만약 `bool`을 자신과 256번 (또는 `char`) 곱하면, `bool`의 256제곱, 즉 `boolchar`를 얻게 됩니다.
 
-How many values are there in the type defined as 256-tuples of bool? Exactly 2256. This is also the number of different functions from char to bool, each function corresponding to a unique 256-tuple. You can similarly calculate that the number of functions from bool to char is 2562, and so on. The exponential notation for function types makes perfect sense in these cases.
+256개의 불리언 값으로 정의된 유형에는 정확히 2256개의 값이 있습니다. 이는 문자(character)에서 불리언으로의 모든 서로 다른 함수(function)의 개수와 같습니다. 각 함수는 고유한 256개 튜플(tuple)에 해당합니다. 마찬가지로 불리언에서 문자(character)로의 함수 개수는 2562개이며, 이와 유사한 방식으로 엑스포넌트 표기법(exponential notation)은 이러한 경우에 완벽하게 적합합니다.
 
-We probably wouldn’t want to fully memoize a function from int or double. But the equivalence between functions and data types, if not always practical, is there. There are also infinite types, for instance lists, strings, or trees. Eager memoization of functions from those types would require infinite storage. But Haskell is a lazy language, so the boundary between lazily evaluated (infinite) data structures and functions is fuzzy. This function vs. data duality explains the identification of Haskell’s function type with the categorical exponential object — which corresponds more to our idea of data.
+저희는 일반적으로 정수(int) 또는 실수(double) 유형의 함수를 완전히 암기(memoize)하는 것은 바람직하지 않을 것입니다. 하지만 함수와 데이터 유형 간의 유사성은 항상 실용적이지 않더라도 존재합니다. 또한, 목록(lists), 문자열(strings), 트리(trees)와 같이 무한한 유형도 있습니다. 이러한 유형의 함수를 즉시 암기하면 무한한 저장 공간이 필요합니다. 하지만 하스켈(Haskell)은 즉시 평가(eager)되지 않는 언어이므로, 즉시 평가되는 (무한한) 데이터 구조와 함수 사이의 경계는 모호합니다. 이 함수와 데이터의 이중성은 하스켈의 함수 유형을 범주적 지수 객체(categorical exponential object)와 동일시하는 이유를 설명하며, 이는 데이터에 대한 저희의 개념과 더 일치합니다.
 
 ## Cartesian Closed Categories
 
-Although I will continue using the category of sets as a model for types and functions, it’s worth mentioning that there is a larger family of categories that can be used for that purpose. These categories are called cartesian closed, and Set is just one example of such a category.
+저를 통해 계속해서 집합을 유형과 함수를 모델로 활용할 것이지만, 이와 유사한 목적으로 사용될 수 있는 더 넓은 범위의 범주가 있다는 점을 말씀드리고 싶습니다. 이러한 범주는 카르테시안 닫힌 범주라고 불리며, 집합은 이러한 범주의 단 하나의 예시일 뿐입니다.
 
-A cartesian closed category must contain:
+경로 기하학적 범주(Cartesian closed category)는 다음을 포함해야 합니다.
 
-- The terminal object,
-- A product of any pair of objects, and
-- An exponential for any pair of objects.
+- 대상 객체(terminal object),
+- 두 객체의 합성(product)이며,
+- 두 객체에 대한 지수(exponential)를 제공합니다.
 
-If you consider an exponential as an iterated product (possibly infinitely many times), then you can think of a cartesian closed category as one supporting products of an arbitrary arity. In particular, the terminal object can be thought of as a product of zero objects — or the zero-th power of an object.
+수학적으로 말씀드린다면, 지수 함수를 무한히 반복되는 곱셈으로 간주한다면, 카테시안 닫힌 범주를 임의의 차수의 제품을 지원하는 것으로 생각할 수 있습니다. 특히, 터미널 객체는 0개의 객체의 곱셈으로 생각할 수 있으며, 이는 객체의 0승과 같습니다.
 
-What’s interesting about cartesian closed categories from the perspective of computer science is that they provide models for the simply typed lambda calculus, which forms the basis of all typed programming languages.
+카테고리 이론에서 카르테지 닫힌 카테고리가 흥미로운 점은, 이들이 심플리 타입된 람다 계산의 모델을 제공한다는 것입니다. 이 람다 계산은 모든 타입된 프로그래밍 언어의 기초가 되기 때문입니다.
 
-The terminal object and the product have their duals: the initial object and the coproduct. A cartesian closed category that also supports those two, and in which product can be distributed over coproduct
+저희 제품의 핵심 기능인 “종속 객체”와 “공액 객체”는 서로 밀접하게 연관되어 있습니다. 또한, 이 두 가지를 모두 지원하는 카테시안 닫힌 범주로서, 제품에 대한 공액 객체에 대한 분배 법칙이 적용됩니다.
 
 ```
 a × (b + c) = a × b + a × c
 (b + c) × a = b × a + c × a
 ```
 
-is called a bicartesian closed category. We’ll see in the next section that bicartesian closed categories, of which Set is a prime example, have some interesting properties.
+이것은 바이카테시안 닫힌 범주라고 합니다. 다음 섹션에서 살펴보시면, 세트가 대표적인 예시인 바이카테시안 닫힌 범주는 흥미로운 특징들을 가지고 있음을 알 수 있습니다.
 
 ## Exponentials and Algebraic Data Types
 
-The interpretation of function types as exponentials fits very well into the scheme of algebraic data types. It turns out that all the basic identities from high-school algebra relating numbers zero and one, sums, products, and exponentials hold pretty much unchanged in any bicartesian closed category theory for, respectively, initial and final objects, coproducts, products, and exponentials. We don’t have the tools yet to prove them (such as adjunctions or the Yoneda lemma), but I’ll list them here nevertheless as a source of valuable intuitions.
+저희는 함수형 타입을 지수 형태로 해석하는 것이 대수적 데이터 타입의 개념과 매우 잘 부합하는 것을 확인했습니다. 특히, 고등학교 때 배운 0과 1의 관계, 합, 곱, 지수와 관련된 기본적인 정체들이, 각각 초기 객체와 최종 객체, 공합, 곱, 지수를 위한 비카르테인 닫힌 범주 이론에서 거의 변하지 않고 유지되는 것을 발견했습니다. 아직 이러한 정체들을 증명할 수 있는 도구(예: 조화 또는 요네다 정리)는 부족하지만, 이러한 정체들이 귀중한 직관을 제공한다는 점을 고려하여, 이 목록을 제공해 드립니다.
 
 ### Zeroth Power
 
@@ -243,11 +245,11 @@ The interpretation of function types as exponentials fits very well into the sch
 a0 = 1
 ```
 
-In the categorical interpretation, we replace 0 with the initial object, 1 with the final object, and equality with isomorphism. The exponential is the internal hom-object. This particular exponential represents the set of morphisms going from the initial object to an arbitrary object a. By the definition of the initial object, there is exactly one such morphism, so the hom-set C(0, a) is a singleton set. A singleton set is the terminal object in Set, so this identity trivially works in Set. What we are saying is that it works in any bicartesian closed category.
+카테고리적 해석 관점에서, 우리는 0을 초기 객체로, 1을 최종 객체로, 그리고 등호를 동형사상으로 대체합니다. 지수(exponential)는 내부 hom-객체입니다. 이 특정 지수는 초기 객체에서 임의의 객체 a로 향하는 모니즘(morphisms)의 집합을 나타냅니다. 초기 객체의 정의에 따르면, 그러한 모니즘은 정확히 하나뿐이므로, hom-집합 C(0, a)는 단일 원소 집합입니다. 단일 원소 집합은 Set에서 터미널 객체이므로, 이 정체성은 Set에서 당연히 성립합니다. 우리는 이것이 비카테리안 닫힌(bicartesian closed) 카테고리에서도 작동한다는 것을 의미합니다.
 
-In Haskell, we replace 0 with Void; 1 with the unit type (); and the exponential with function type. The claim is that the set of functions from Void to any type a is equivalent to the unit type — which is a singleton. In other words, there is only one function Void->a. We’ve seen this function before: it’s called absurd.
+하스케일에서는 0을 Void로, 1을 유닛 타입 ()으로, 지수를 함수 타입으로 대체합니다. 이러한 주장은 Void에서 어떤 타입 a로의 함수 집합이 유닛 타입과 동등하다는 것입니다. 즉, Void -> a 형태의 함수는 단 하나 존재합니다. 이 함수는 이미 저희가 살펴본 적이 있습니다. 바로 ‘absurd’라는 이름의 함수입니다.
 
-This is a little bit tricky, for two reasons. One is that in Haskell we don’t really have uninhabited types — every type contains the “result of a never ending calculation,” or the bottom. The second reason is that all implementations of absurd are equivalent because, no matter what they do, nobody can ever execute them. There is no value that can be passed to absurd. (And if you manage to pass it a never ending calculation, it will never return!)
+이 부분은 몇 가지 이유로 인해 다소 복잡합니다. 첫째, 하스케일에서는 무주류 타입(uninhabited type)이라는 개념이 존재하지 않습니다. 모든 타입은 마치 끝없는 계산의 결과나, 근본적인 값을 포함하고 있다고 이해하시면 됩니다. 둘째, 모든 absurd 구현은 서로 동등합니다. 어떤 작업을 수행하든, 아무도 실제로 실행할 수 없기 때문입니다. absurd에 전달하려는 값은 존재하지 않습니다. (그리고 만약 무한한 계산을 전달한다면, 절대 결과를 반환하지 않을 것입니다!)
 
 ### Powers of One
 
@@ -255,9 +257,9 @@ This is a little bit tricky, for two reasons. One is that in Haskell we don’t 
 1a = 1
 ```
 
-This identity, when interpreted in Set, restates the definition of the terminal object: There is a unique morphism from any object to the terminal object. In general, the internal hom-object from a to the terminal object is isomorphic to the terminal object itself.
+저희는 이 정체성을 Set 내에서 해석할 때, 종결 객체의 정의를 재확인하는 것으로 이해할 수 있습니다. 즉, 어떤 객체에서든 반드시 하나의 모피즘(morphism)이 종결 객체로 향한다는 의미입니다. 일반적으로, 어떤 객체에서 종결 객체로의 내부 홈 객체(internal hom-object)는 종결 객체 자체와 동형(isomorphic)입니다.
 
-In Haskell, there is only one function from any type a to unit. We’ve seen this function before — it’s called unit. You can also think of it as the function const partially applied to ().
+하스케일에서는 어떤 타입 a에서 unit으로 가는 함수는 딱 하나만 존재합니다. 이 함수는 이미 저희가 살펴본 적이 있는데, 이름하여 ‘unit’입니다. 이 함수를 const 함수에 괄호()를 붙인 것과 유사하게 생각하실 수 있습니다.
 
 ### First Power
 
@@ -265,7 +267,7 @@ In Haskell, there is only one function from any type a to unit. We’ve seen thi
 a1 = a
 ```
 
-This is a restatement of the observation that morphisms from the terminal object can be used to pick “elements” of the object a. The set of such morphisms is isomorphic to the object itself. In Set, and in Haskell, the isomorphism is between elements of the set a and functions that pick those elements, ()->a.
+이것은 종단 객체에서 유래하는 모리즘을 사용하여 객체 a의 “요소”를 선택할 수 있다는 관찰을 재구성한 것입니다. 이러한 모리즘들의 집합은 객체 자체와 동형입니다. Set와 Haskell에서 이 동형성은 집합 a의 요소와 해당 요소를 선택하는 함수 사이의 것입니다.
 
 ### Exponentials of Sums
 
@@ -273,13 +275,13 @@ This is a restatement of the observation that morphisms from the terminal object
 ab+c = ab × ac
 ```
 
-Categorically, this says that the exponential from a coproduct of two objects is isomorphic to a product of two exponentials. In Haskell, this algebraic identity has a very practical, interpretation. It tells us that a function from a sum of two types is equivalent to a pair of functions from individual types. This is just the case analysis that we use when defining functions on sums. Instead of writing one function definition with a case statement, we usually split it into two (or more) functions dealing with each type constructor separately. For instance, take a function from the sum type (Either Int Double):
+전적으로 그렇습니다. 이 내용은 두 객체의 공산수에서 파생된 지수함수가 두 지수함수의 곱과 동형이라는 것을 명확히 보여줍니다. 하스케일(Haskell)에서 이 기본적인 대수적 정리는 매우 실질적인 의미를 지닙니다. 즉, 두 종류의 합(sum)에 대한 함수는 개별 종류로부터 파생된 두 함수의 쌍과 동일하다는 것을 알려줍니다. 이는 합(sum)에 대한 함수를 정의할 때 사용하는 경우 분석과 같습니다. 하나의 함수 정의와 조건문(case statement)을 사용하는 대신, 일반적으로 각 종류 생성자(type constructor)를 개별적으로 다루는 두 개 이상의 함수로 나누어 작성합니다. 예를 들어, (Either Int Double)와 같은 합(sum) 종류에 대한 함수를 고려해 보겠습니다.
 
 ```
 f :: Either Int Double -> String
 ```
 
-It may be defined as a pair of functions from, respectively, Int and Double:
+정밀도(precision)를 나타내는 함수 쌍으로 정의될 수 있습니다. 즉, 정수형(Int)과 실수형(Double) 데이터 유형을 각각 담당하는 함수 쌍을 의미합니다.
 
 ```
 f (Left n)  = if n < 0 then "Negative int" else "Positive int"
@@ -294,7 +296,7 @@ Here, n is an Int and x is a Double.
 (ab)c = ab×c
 ```
 
-This is just a way of expressing currying purely in terms of exponential objects. A function returning a function is equivalent to a function from a product (a two-argument function).
+저희는 순수하게 지수형 객체를 사용하여 커링을 표현하는 방법을 안내해 드립니다. 함수가 다른 함수를 반환하는 것은 두 개의 인수를 받는 함수와 동일한 개념입니다.
 
 ### Exponentials over Products
 
@@ -302,88 +304,88 @@ This is just a way of expressing currying purely in terms of exponential objects
 (a × b)c = ac × bc
 ```
 
-In Haskell: A function returning a pair is equivalent to a pair of functions, each producing one element of the pair.
+하스케일에서 함수가 튜플을 반환하는 것은, 각 함수가 튜플의 한쪽 요소씩을 생성하는 두 개의 함수로 구성된 튜플과 완전히 동일합니다.
 
-It’s pretty incredible how those simple high-school algebraic identities can be lifted to category theory and have practical application in functional programming.
+정말 놀랍게도, 단순한 고등학교 수준의 대수적 정리는 카테고리 이론으로 확장되어 함수형 프로그래밍에서 실질적인 응용을 갖게 될 수 있습니다.
 
 ## Curry-Howard Isomorphism
 
-I have already mentioned the correspondence between logic and algebraic data types. The Void type and the unit type () correspond to false and true. Product types and sum types correspond to logical conjunction ∧ (AND) and disjunction ⋁ (OR). In this scheme, the function type we have just defined corresponds to logical implication ⇒. In other words, the type a->b can be read as “if a then b.”
+저희는 논리와 대수적 데이터 타입 간의 관계에 대해 이미 말씀드렸습니다. Void 타입과 unit 타입 ()는 false와 true에 해당하며, Product 타입과 Sum 타입은 논리적 접속사 ∧ (AND)와 논리적 분리사 ⋁ (OR)에 해당합니다. 저희의 최근에 정의한 함수 타입은 논리적 함의 ⇒에 해당합니다. 즉, a->b는 “if a then b”로 읽힐 수 있습니다.
 
-According to the Curry-Howard isomorphism, every type can be interpreted as a proposition — a statement or a judgment that may be true or false. Such a proposition is considered true if the type is inhabited and false if it isn’t. In particular, a logical implication is true if the function type corresponding to it is inhabited, which means that there exists a function of that type. An implementation of a function is therefore a proof of a theorem. Writing programs is equivalent to proving theorems. Let’s see a few examples.
+경로-호어 이성질성에 따르면, 모든 유형은 명제 또는 판단으로 해석될 수 있습니다. 이러한 명제는 유형이 거주(inhabited)하면 참으로 간주되고, 그렇지 않으면 거짓으로 간주됩니다. 특히, 논리적 함축(logical implication)은 해당 유형에 대응하는 함수 유형이 거주하면 참이며, 즉, 해당 유형의 함수가 존재한다는 의미입니다. 따라서 함수의 구현은 정(theorem)의 증명과 같습니다. 몇 가지 예를 살펴보겠습니다.
 
-Let’s take the function eval we have introduced in the definition of the function object. Its signature is:
+저희는 함수 객체의 정의에서 소개드린 `eval` 함수를 살펴보겠습니다. 이 함수의 서명(signature)은 다음과 같습니다:
 
 ```
 eval :: ((a -> b), a) -> b
 ```
 
-It takes a pair consisting of a function and its argument and produces a result of the appropriate type. It’s the Haskell implementation of the morphism:
+이것은 함수와 그 인자를 포함하는 쌍으로 구성되며, 적절한 유형의 결과를 생성합니다. 이는 모리즘의 하스켈 구현입니다.
 
 ```
 eval :: (a⇒b) × a -> b
 ```
 
-which defines the function type a⇒b (or the exponential object ba). Let’s translate this signature to a logical predicate using the Curry-Howard isomorphism:
+이것은 a⇒b (또는 지수 객체 ba)의 함수 유형을 정의합니다. 커리-하워드 이소머피즘을 사용하여 이 서명을 논리적 전제로 번역해 보겠습니다.
 
 ```
 ((a ⇒ b) ∧ a) ⇒ b
 ```
 
-Here’s how you can read this statement: If it’s true that b follows from a, and a is true, then b must be true. This makes perfect intuitive sense and has been known since antiquity as modus ponens. We can prove this theorem by implementing the function:
+이 문장을 읽어보시는 방법은 다음과 같습니다. 만약 ‘a’가 ‘b’를 의미하고 ‘a’가 참이라면, ‘b’는 반드시 참이어야 합니다. 이는 직관적으로 완벽하게 이해되는 내용이며, 고대부터 ‘modus ponens’라고 알려져 있습니다. 이 정리를 증명하기 위해 다음 함수를 구현할 수 있습니다:
 
 ```
 eval :: ((a -> b), a) -> b
 eval (f, x) = f x
 ```
 
-If you give me a pair consisting of a function f taking a and returning b, and a concrete value x of type a, I can produce a concrete value of type b by simply applying the function f to x. By implementing this function I have just shown that the type ((a -> b), a) -> b is inhabited. Therefore modus ponens is true in our logic.
+저희는 함수 f가 a를 입력받아 b를 반환하고, 구체적인 값 x (a 타입)을 제공해 주시면, 함수 f를 x에 적용하는 것만으로 구체적인 값 b (b 타입)을 생성해 드릴 수 있습니다. 이와 같이 함수를 구현함으로써, ((a -> b), a) -> b 타입이 존재한다는 것을 입증했으며, 이에 따라 모드 폰스(Modus Ponens)는 저희 논리에서 유효합니다.
 
-How about a predicate that is blatantly false? For instance: if a or b is true then a must be true.
+아주 명백하게 거짓된 전제는 어떠할까요? 예를 들어, “만약 a 또는 b가 참이라면, a는 반드시 참이어야 합니다.”
 
 ```
 a ⋁ b ⇒ a
 ```
 
-This is obviously wrong because you can chose an a that is false and a b that is true, and that’s a counter-example.
+명확히 말씀드리면, 거짓된 ‘a’와 참된 ‘b’를 선택하는 경우를 예시로 들어보시면, 이것이 반례라는 것을 이해하실 수 있을 겁니다.
 
-Mapping this predicate into a function signature using the Curry-Howard isomorphism, we get:
+이 논리적 명제를 함수 시그니처로 매핑하는 데, 커리-하워드 이소머시즘을 활용하면 다음과 같습니다.
 
 ```
 Either a b -> a
 ```
 
-Try as you may, you can’t implement this function — you can’t produce a value of type a if you are called with the Right value. (Remember, we are talking about pure functions.)
+무엇을 시도하더라도 이 함수를 구현할 수 없습니다. Right 값으로 호출될 경우, a 타입의 값을 생성할 수 없다는 점을 기억해 주십시오. (우리는 순수 함수에 대해 이야기하고 있습니다.)
 
-Finally, we come to the meaning of the absurd function:
+마지막으로, 이상함 함수(absurd function)의 의미에 대해 살펴보겠습니다.
 
 ```
 absurd :: Void -> a
 ```
 
-Considering that Void translates into false, we get:
+고려해 주신 대로 Void는 거짓을 의미하므로, 다음과 같습니다:
 
 ```
 false ⇒ a
 ```
 
-Anything follows from falsehood (ex falso quodlibet). Here’s one possible proof (implementation) of this statement (function) in Haskell:
+거짓에서 모든 것이 도출될 수 있습니다 (ex falso quodlibet). 다음은 하스케일(Haskell)에서 이 명제를 증명하는 한 가지 가능한 구현입니다. 
 
 ```
 absurd (Void a) = absurd a
 ```
 
-where Void is defined as:
+Void는 다음과 같이 정의됩니다:
 
 ```
 newtype Void = Void Void
 ```
 
-As always, the type Void is tricky. This definition makes it impossible to construct a value because in order to construct one, you would need to provide one. Therefore, the function absurd can never be called.
+항상 그렇듯이, Void 타입은 다루기 쉽지 않습니다. 이 정의는 값을 생성하는 것을 불가능하게 합니다. 왜냐하면 값을 생성하려면 먼저 값을 제공해야 하기 때문입니다. 따라서 absurd 함수는 절대 호출될 수 없습니다.
 
-These are all interesting examples, but is there a practical side to Curry-Howard isomorphism? Probably not in everyday programming. But there are programming languages like Agda or Coq, which take advantage of the Curry-Howard isomorphism to prove theorems.
+흥미로운 예시들이 많지만, 커리-허이스 상관관계에 실질적인 활용 가치가 있을까요? 아마도 일상적인 프로그래밍에서는 그렇지 않을 것입니다. 하지만 아가다(Agda)나 코크(Coq)와 같이 커리-허이스 상관관계를 활용하여 정리를 증명하는 프로그래밍 언어들도 있습니다.
 
-Computers are not only helping mathematicians do their work — they are revolutionizing the very foundations of mathematics. The latest hot research topic in that area is called Homotopy Type Theory, and is an outgrowth of type theory. It’s full of Booleans, integers, products and coproducts, function types, and so on. And, as if to dispel any doubts, the theory is being formulated in Coq and Agda. Computers are revolutionizing the world in more than one way.
+수학자분들의 업무를 돕는 것뿐만 아니라, 수학의 근본적인 토대 자체를 혁신하고 있습니다. 이 분야의 최신 연구 주제인 호모토피 타입 이론(Homotopy Type Theory)은 타입 이론에서 파생된 것으로, 불리언(Boolean), 정수, 곱(product), 공곱(coproduct), 함수 타입 등 다양한 개념들을 포함하고 있습니다. 또한, 의심을 해소하려는 듯이, 이 이론은 Coq와 Agda에서 구체화되고 있습니다. 컴퓨터는 여러 방면에서 세상을 변화시키고 있습니다.
 
 ## Bibliography
 
