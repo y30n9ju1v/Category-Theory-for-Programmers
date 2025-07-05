@@ -1,5 +1,10 @@
 # Category-Theory-for-Programmers
+## PR 대환영!!!
 
+* 참고
+	* 번역은 gemma3-4b을 이용하였습니다.
+
+* 코드
 ~~~python
 import os
 from tqdm import tqdm
@@ -28,5 +33,3 @@ with open("./urls.txt", "r") as f:
             ff.write(mk_doc)
 
 ~~~
-
-* 번역은 gemma3-4b을 이용하였습니다.
