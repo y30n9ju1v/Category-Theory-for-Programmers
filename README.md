@@ -28,3 +28,5 @@ with open("./urls.txt", "r") as f:
             ff.write(mk_doc)
 
 ~~~
+
+* 번역은 gemma3-4b을 이용하였습니다.
